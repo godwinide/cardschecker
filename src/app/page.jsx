@@ -19,7 +19,7 @@ const page = () => {
               Our intelligent algorithms operate with great speed to
               deliver sufficient information to you
             </p>
-            <Link href={"/"} className={` ${styles.actionBTN} text-white text-sm font-bold w-40 text-center rounded-md py-4 my-6 block mx-auto sm:mx-0`}>Verify Now</Link>
+            <Link href={"#verify"} className={` ${styles.actionBTN} text-white text-sm font-bold w-40 text-center rounded-md py-4 my-6 block mx-auto sm:mx-0`}>Verify Now</Link>
           </div>
           <img src='/cardimg1.webp' className='w-full sm:w-1/2'/>
         </div>
@@ -36,7 +36,7 @@ const page = () => {
               Verify yours now.
           </h2>
 
-          <a href="/"  className={`block ${styles.actionBTN2}`}>Try for free</a>
+          <a href="#verify"  className={`block ${styles.actionBTN2}`}>Try for free</a>
         </div>
         </div>
     </section>
