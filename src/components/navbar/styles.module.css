@@ -1,0 +1,15 @@
+.harmburger {
+    width: 3.5em;
+    height: 2.5em;
+    padding: .6em;
+    border-radius: 10px;
+    background-color: rgb(23, 23, 24);
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.harmburger div {
+    width: 100%;
+    height: 2px;
+    background-color: #e2e2e2;
+}

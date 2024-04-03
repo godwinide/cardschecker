@@ -1,0 +1,48 @@
+.hero {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #3500d6; */
+    background-color: #0d0122;
+}
+
+.textPrimary {
+    color: #F02D01;
+}
+
+.bgPrimary {
+    background-color: #F02D01;
+}
+
+.actionBTN {
+    background-color: rgb(62, 3, 150);
+    transition: .5s;
+}
+
+.actionBTN2 {
+    background-color: #FB4218;
+    padding: 1em;
+    border-radius: 10px;
+    font-weight: bold;
+    color: #fff;
+    transition: .5s;
+}
+
+.actionBTN:hover,
+.actionBTN2:hover {
+    background-color: rgb(211, 211, 211);
+    color: #000;
+}
+
+
+.skewWrap {
+    background-color: #0c0b0b;
+}
+
+
+.servicesWrap {
+    /* background-color: #0d0122; */
+    /* background-color: #fff; */
+}

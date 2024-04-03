@@ -1,0 +1,33 @@
+.modelWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000057;
+    z-index: 100;
+}
+
+.modelWrap .content {
+    background-color: #fff;
+    max-width: 800px;
+    padding: 2em;
+    border-radius: 10px;
+    text-align: center;
+    animation-name: scaleup;
+    animation-timing-function: ease-out;
+    animation-duration: .2s;
+}
+
+@keyframes scaleup {
+    from {
+        transform: scale(0.5);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}

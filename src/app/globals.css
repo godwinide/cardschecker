@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background-color: #0d0122;
+    scroll-behavior: smooth;
+}
+
+.container {
+    width: 1366px;
+    margin: 0 auto;
+}
+
+
+@media screen and (max-width: 1920px) {
+    .container {
+        width: 1440px;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .container {
+        width: 1366px;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    .container {
+        width: 1280px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .container {
+        width: 1080px;
+    }
+}
+
+@media screen and (max-width: 1080px) {
+    .container {
+        width: 768px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 480px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        width: 90%;
+    }
+}
