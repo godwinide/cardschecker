@@ -11,7 +11,7 @@ const Modal = ({cardname, amount, showmodal, setShowmodal}) => {
       <hr />
       <p className='my-2'>Brand: {cardname}</p>
       <p className='my-2'>Amount: {amount}</p>
-      <p  className='my-2'>Status: Inactive</p>
+      <p  className='my-2'>Status: Deactivated</p>
       <button
         onClick={()=>setShowmodal(false)}
         className='bg-blue-400 text-center text-white py-2 px-4 rounded-lg shadow-md my-4'
